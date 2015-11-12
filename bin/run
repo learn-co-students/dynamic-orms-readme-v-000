@@ -8,7 +8,11 @@ require_relative "../config/environment.rb"
 song = Song.new(name: "Hello", album: "25")
 puts "song name: " + song.name
 puts "song album: " + song.album
-# binding.pry
-song.save
 
-DB[:conn].execute("SELECT * FROM songs")
+
+if song.save
+  puts "Your song has been saved:"
+  puts DB[:conn].execute("SELECT * FROM songs")
+else
+  puts "your song was not saved"
+end
