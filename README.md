@@ -2,9 +2,9 @@
 
 ## Objectives
 
-1. Understand the concept of a dynamic ORM and why they are so useful to us as developers. 
-2. Learn how to build a basic dynamic ORM. 
-3. Understand how to build a dynamic ORM that can be used by any given Ruby class. 
+1. Explain why a dynamic ORM is useful to us as developers 
+2. Build a basic dynamic ORM
+3. Build a dynamic ORM that can be used by any given Ruby class
 
 ## Why Dynamic ORMs?
 
