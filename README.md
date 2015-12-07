@@ -333,7 +333,7 @@ This will return:
 ["name", "album"]
 ```
 
-We're almost there with the list of column names needed to craft our `INSERT` statement. Let's take another look at what the statement need to look like:
+We're almost there with the list of column names needed to craft our `INSERT` statement. Let's take another look at what the statement needs to look like:
 
 ```sql
 INSERT INTO songs (name, album) 
@@ -453,5 +453,3 @@ This method is dynamic and abstract because it does not reference the table name
 Remember, dynamic ORMs are hard. Spend some time reading over the code in `lib/student.rb` and playing with the code in `bin/run`. Practice creating, saving and querying songs in the `bin/run` file and run the program again and again until you get a better feel for it. 
 
 Now that we have all of these great dynamic, abstract methods that connect a class to a database table, we'll move on to extracting into a parent class that any other class can inherit from. 
-
-<a href='https://learn.co/lessons/dynamic-orms-readme' data-visibility='hidden'>View this lesson on Learn.co</a>
