@@ -280,7 +280,7 @@ Let's take this one step at a time.
 
 #### Abstracting the Table Name
 
-Luckily for us, we already have a way method to give us the table name associated to any give class: `<class name>.table_name`. 
+Luckily for us, we already have a method to give us the table name associated to any give class: `<class name>.table_name`. 
 
 Recall, however, that the conventional `#save` is an *instance* method. So, inside a `#save` method, `self` will refer to the instance of the class, not the class itself. In order to use a class method inside an instance method, we need to do the following:
 
@@ -453,5 +453,3 @@ This method is dynamic and abstract because it does not reference the table name
 Remember, dynamic ORMs are hard. Spend some time reading over the code in `lib/student.rb` and playing with the code in `bin/run`. Practice creating, saving and querying songs in the `bin/run` file and run the program again and again until you get a better feel for it. 
 
 Now that we have all of these great dynamic, abstract methods that connect a class to a database table, we'll move on to extracting into a parent class that any other class can inherit from. 
-
-<a href='https://learn.co/lessons/dynamic-orms-readme' data-visibility='hidden'>View this lesson on Learn.co</a>
