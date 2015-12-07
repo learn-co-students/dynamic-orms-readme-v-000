@@ -280,7 +280,7 @@ Let's take this one step at a time.
 
 #### Abstracting the Table Name
 
-Luckily for us, we already have a way method to give us the table name associated to any give class: `<class name>.table_name`. 
+Luckily for us, we already have a method to give us the table name associated to any give class: `<class name>.table_name`. 
 
 Recall, however, that the conventional `#save` is an *instance* method. So, inside a `#save` method, `self` will refer to the instance of the class, not the class itself. In order to use a class method inside an instance method, we need to do the following:
 
