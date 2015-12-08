@@ -97,7 +97,7 @@ It will return something that looks like this:
 
 This will be helpful to us as we use information requested from our database table to build attributes and methods on our `Song` class, but more on that later. 
 
-Okay, now that we see how our database and table has been set up, let's more on to metaprogramming our `Song` class using information from our database. 
+Okay, now that we see how our database and table have been set up, let's move onto metaprogramming our `Song` class using information from our database. 
 
 ## Step 2: Building `attr_accessor`s from column names
 
