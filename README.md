@@ -406,7 +406,7 @@ The above code, however, will result in a `values` array
 We need comma separated values for our SQL statement. Let's join this array into a string:
 
 ```ruby
-values.join(", "
+values.join(", ")
 ```
 
 Let's wrap up this code in a handy method, **`#values_for_insert`:**
