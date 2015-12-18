@@ -92,7 +92,7 @@ So, instead of `DB[:conn].execute("SELECT * FROM songs LIMIT 1")` returning some
 It will return something that looks like this:
 
 ```ruby
-{"id"=>1, "name"=>"Hello", "album"=>"25}
+{"id"=>1, "name"=>"Hello", "album"=>"25", 0 => 1, 1 => "Hello", 2 => "25"}
 ```
 
 This will be helpful to us as we use information requested from our database table to build attributes and methods on our `Song` class, but more on that later. 
@@ -458,3 +458,5 @@ Now that we have all of these great dynamic, abstract methods that connect a cla
 [SQLite- PRAGMA](http://www.tutorialspoint.com/sqlite/sqlite_pragma.htm)
 
 [PRAGMA](https://www.sqlite.org/pragma.html#pragma_table_info)
+
+<a href='https://learn.co/lessons/dynamic-orms-readme' data-visibility='hidden'>View this lesson on Learn.co</a>
