@@ -44,7 +44,7 @@ Well, with a dynamic ORM, we can abstract all of our conventional ORM methods in
 
 ## What is a Dynamic ORM?
 
-A dynamic ORM is allows us to map an existing database table to a class and write methods can can use nothing more than information regarding a specific database table to:
+A dynamic ORM allows us to map an existing database table to a class and write methods can can use nothing more than information regarding a specific database table to:
 
 * Create `attr_accessors` for a Ruby class. 
 * Create shareable methods for inserting, updating, selecting and deleting data from the database table. 
@@ -458,3 +458,5 @@ Now that we have all of these great dynamic, abstract methods that connect a cla
 [SQLite- PRAGMA](http://www.tutorialspoint.com/sqlite/sqlite_pragma.htm)
 
 [PRAGMA](https://www.sqlite.org/pragma.html#pragma_table_info)
+
+<a href='https://learn.co/lessons/dynamic-orms-readme' data-visibility='hidden'>View this lesson on Learn.co</a>
