@@ -236,7 +236,7 @@ Now that our `attr_accessor`s are defined, we can build the `#initialize` method
 We want to be able to create a new song like this:
 
 ```ruby
-song = Song.new(name: "Hello", "25")
+song = Song.new(name: "Hello", album: "25")
 
 song.name 
 # => "Hello"
