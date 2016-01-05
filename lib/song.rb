@@ -1,8 +1,27 @@
 require_relative "../config/environment.rb"
 require 'active_support/inflector'
-
+require 'pry'
 class Song
 
+  #  attr_accessor :name, album
+  # attr_reader :id
+
+  #  def initialize(id=nil, name, album)
+  #   @id = id
+  #   @name = name
+  #   @album = album
+  # end
+
+  #  def self.create_table
+  #   sql =  <<-SQL 
+  #     CREATE TABLE IF NOT EXISTS songs (
+  #       id INTEGER PRIMARY KEY, 
+  #       name TEXT, 
+  #       album TEXT
+  #       )
+  #   SQL
+  #   DB[:conn].execute(sql) 
+  # end
 
   def self.table_name
     self.to_s.downcase.pluralize
@@ -12,13 +31,12 @@ class Song
     DB[:conn].results_as_hash = true
 
     sql = "pragma table_info('#{table_name}')"
-
     table_info = DB[:conn].execute(sql)
     column_names = []
     table_info.each do |row|
       column_names << row["name"]
     end
-    column_names.compact
+    column_names.compact  # [id,artist,album, name]
   end
 
   self.column_names.each do |col_name|
@@ -44,6 +62,7 @@ class Song
   def values_for_insert
     values = []
     self.class.column_names.each do |col_name|
+      binding.pry
       values << "'#{send(col_name)}'" unless send(col_name).nil?
     end
     values.join(", ")
