@@ -92,7 +92,7 @@ So, instead of `DB[:conn].execute("SELECT * FROM songs LIMIT 1")` returning some
 It will return something that looks like this:
 
 ```ruby
-{"id"=>1, "name"=>"Hello", "album"=>"25}
+{"id"=>1, "name"=>"Hello", "album"=>"25", 0 => 1, 1 => "Hello", 2 => "25"}
 ```
 
 This will be helpful to us as we use information requested from our database table to build attributes and methods on our `Song` class, but more on that later. 
