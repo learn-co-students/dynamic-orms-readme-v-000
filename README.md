@@ -14,7 +14,7 @@ We can implement this mapping by using a class to create a database table:
 
 ```ruby
 class Song
-  attr_accessor :name, album
+  attr_accessor :name, :album
   attr_reader :id
   
   def initialize(id=nil, name, album)
@@ -63,7 +63,7 @@ For this exercise, we'll be working with a `Song` class. To create a dynamic ORM
 require 'sqlite3'
 
 
-DB = {:conn => SQLite3::Database.new("db/students.db")}
+DB = {:conn => SQLite3::Database.new("db/songs.db")}
 sql = <<-SQL
   CREATE TABLE IF NOT EXISTS songs (
   id INTEGER PRIMARY KEY, 
@@ -101,7 +101,7 @@ Okay, now that we see how our database and table have been set up, let's move on
 
 ## Step 2: Building `attr_accessor`s from column names
 
-The next step of building our dynamic ORM is to use the column names of the `songs` table to dynamically create the `attr_accessor`s of our `Song` class. In order to do that, we first need to collect the column names from our `songs` table. In order to collect the column names from the songs table we need to tell our `Song` class what table to query. However, we *dont'* want to tell the `Song` class to query the `songs` table explicitly. This would not be flexible. If we defined a method that explicitly referenced the `songs` table, we would not be able to extract that method into a *shareable* method later on. Remember, the goal of our dynamic ORM is to define a series of methods that be shared by *any class*. So, we need to avoid explicitly referencing table and column names. 
+The next step of building our dynamic ORM is to use the column names of the `songs` table to dynamically create the `attr_accessor`s of our `Song` class. In order to do that, we first need to collect the column names from our `songs` table. In order to collect the column names from the songs table we need to tell our `Song` class what table to query. However, we *don't* want to tell the `Song` class to query the `songs` table explicitly. This would not be flexible. If we defined a method that explicitly referenced the `songs` table, we would not be able to extract that method into a *shareable* method later on. Remember, the goal of our dynamic ORM is to define a series of methods that be shared by *any class*. So, we need to avoid explicitly referencing table and column names. 
 
 Now that we understand what we need to do, let's write a method that returns the name of a table, given the name of a class:
 
