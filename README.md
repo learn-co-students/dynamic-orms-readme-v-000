@@ -101,7 +101,7 @@ Okay, now that we see how our database and table have been set up, let's move on
 
 ## Step 2: Building `attr_accessor`s from column names
 
-The next step of building our dynamic ORM is to use the column names of the `songs` table to dynamically create the `attr_accessor`s of our `Song` class. In order to do that, we first need to collect the column names from our `songs` table. In order to collect the column names from the songs table we need to tell our `Song` class what table to query. However, we *don't* want to tell the `Song` class to query the `songs` table explicitly. This would not be flexible. If we defined a method that explicitly referenced the `songs` table, we would not be able to extract that method into a *shareable* method later on. Remember, the goal of our dynamic ORM is to define a series of methods that be shared by *any class*. So, we need to avoid explicitly referencing table and column names. 
+The next step of building our dynamic ORM is to use the column names of the `songs` table to dynamically create the `attr_accessor`s of our `Song` class. In order to do that, we first need to collect the column names from our `songs` table. In order to collect the column names from the songs table we need to tell our `Song` class what table to query. However, we *don't* want to tell the `Song` class to query the `songs` table explicitly. This would not be flexible. If we defined a method that explicitly referenced the `songs` table, we would not be able to extract that method into a *shareable* method later on. Remember, the goal of our dynamic ORM is to define a series of methods that can be shared by *any class*. So, we need to avoid explicitly referencing table and column names. 
 
 Now that we understand what we need to do, let's write a method that returns the name of a table, given the name of a class:
 
@@ -459,4 +459,6 @@ Now that we have all of these great dynamic, abstract methods that connect a cla
 
 [PRAGMA](https://www.sqlite.org/pragma.html#pragma_table_info)
 
-<p data-visibility='hidden'>View <a href='https://learn.co/lessons/dynamic-orms-readme' title='Dynamic ORMs'>Dynamic ORMs</a> on Learn.co and start learning to code for free.</p>
+<a href='https://learn.co/lessons/dynamic-orms-readme' data-visibility='hidden'>View this lesson on Learn.co</a>
+
+<p data-visibility='hidden'>View <a href='https://learn.co/lessons/dynamic-orms-readme'>Dynamic ORMs</a> on Learn.co and start learning to code for free.</p>
