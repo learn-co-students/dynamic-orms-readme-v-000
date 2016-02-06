@@ -1,12 +1,21 @@
+require 'pry'
+
 require 'sqlite3'
 
 require_relative "../lib/song.rb"
 require_relative "../config/environment.rb"
 
+puts "enter a song title, artist, album"
+s=gets.chomp.gsub(", ", ",").split(",")
+song_hash = {name: s[0], artist: s[1], album: s[2]}
+Song.check_or_update(song_hash)
+song = Song.new(song_hash)
 
-song = Song.new(name: "Hello", album: "25")
 puts "song name: " + song.name
+puts "song artist: " + song.artist
 puts "song album: " + song.album
 song.save
 
 DB[:conn].execute("SELECT * FROM songs")
+
+
