@@ -1,7 +1,8 @@
+require 'pry'
 require_relative "../config/environment.rb"
 require 'active_support/inflector'
 
-class Song
+class Student
 
 
   def self.table_name
@@ -60,5 +61,6 @@ class Song
 
 end
 
+binding.pry
 
 
