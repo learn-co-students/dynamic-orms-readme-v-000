@@ -400,7 +400,7 @@ SQL expects us to pass in each column value in single quotes.
 The above code, however, will result in a `values` array
 
 ```ruby
-[" 'the name of the song' ", " 'the album of the song' "
+[" 'the name of the song' ", " 'the album of the song' "]
 ```
 
 We need comma separated values for our SQL statement. Let's join this array into a string:
