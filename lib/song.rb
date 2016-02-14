@@ -3,6 +3,12 @@ require 'active_support/inflector'
 
 class Song
 
+  def done
+    puts "let me submit"
+  end
+
+
+
 
   def self.table_name
     self.to_s.downcase.pluralize
@@ -59,6 +65,3 @@ class Song
   end
 
 end
-
-
-
