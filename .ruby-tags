@@ -1,0 +1,15 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+Song	lib/song.rb	/^class Song$/;"	c
+col_names_for_insert	lib/song.rb	/^  def col_names_for_insert$/;"	f	class:Song
+column_names	lib/song.rb	/^  def self.column_names$/;"	F	class:Song
+find_by_name	lib/song.rb	/^  def self.find_by_name(name)$/;"	F	class:Song
+initialize	lib/song.rb	/^  def initialize(options={})$/;"	f	class:Song
+save	lib/song.rb	/^  def save$/;"	f	class:Song
+table_name	lib/song.rb	/^  def self.table_name$/;"	F	class:Song
+table_name_for_insert	lib/song.rb	/^  def table_name_for_insert$/;"	f	class:Song
+values_for_insert	lib/song.rb	/^  def values_for_insert$/;"	f	class:Song
