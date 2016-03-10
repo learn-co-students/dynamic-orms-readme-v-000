@@ -2,8 +2,7 @@ require_relative "../config/environment.rb"
 require 'active_support/inflector'
 
 class Song
-
-
+  
   def self.table_name
     self.to_s.downcase.pluralize
   end
@@ -53,8 +52,8 @@ class Song
     self.class.column_names.delete_if {|col| col == "id"}.join(", ")
   end
 
-  def self.find_by_name(name)
-    sql = "SELECT * FROM #{self.table_name} WHERE name = '#{name}'"
+  def self.find_by_name(z)
+    sql = "SELECT * FROM #{self.table_name} WHERE name = '#{z}'"
     DB[:conn].execute(sql)
   end
 
