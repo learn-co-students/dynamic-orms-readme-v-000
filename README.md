@@ -64,6 +64,8 @@ require 'sqlite3'
 
 
 DB = {:conn => SQLite3::Database.new("db/songs.db")}
+DB[:conn].execute("DROP TABLE IF EXISTS songs")
+
 sql = <<-SQL
   CREATE TABLE IF NOT EXISTS songs (
   id INTEGER PRIMARY KEY, 
@@ -79,7 +81,8 @@ DB[:conn].results_as_hash = true
 Here we are doing a couple of things:
 
 1. Creating the database.
-2. Creating the `songs` table. 
+2. Drop `songs` to avoid an error.
+3. Creating the `songs` table. 
 
 Lastly, we use the `#results_as_hash` method, available to use from the SQLite3-Ruby gem. This method says: when a `SELECT` statement is executed, don't return a database row as an array, return it as a hash with the column names as keys. 
 
@@ -231,7 +234,7 @@ This is metaprogramming because we are writing code that writes code for us. By 
 
 ## Step 3: Building an abstract `#initialize` Method
 
-Now that our `attr_accessor`s are defined, we can build the `#initialize` method for the `Song` class. Just like everything else about our dynamic ORM, we want our `#initialize` method to be abstract, i.e. not specific to the `Song` class, so that we can later remove it into a parent class that any other class can inherit from. Once again, we'll use metaprogramming to achieve. 
+Now that our `attr_accessor`s are defined, we can build the `#initialize` method for the `Song` class. Just like everything else about our dynamic ORM, we want our `#initialize` method to be abstract, i.e. not specific to the `Song` class, so that we can later remove it into a parent class that any other class can inherit from. Once again, we'll use metaprogramming to achieve this. 
 
 We want to be able to create a new song like this:
 
