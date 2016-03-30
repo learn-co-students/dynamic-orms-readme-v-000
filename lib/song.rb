@@ -1,5 +1,5 @@
 require_relative "../config/environment.rb"
-require 'active_support/inflector'
+require 'active_support/inflector' #for pluralize
 
 class Song
 
@@ -11,7 +11,7 @@ class Song
   def self.column_names
     DB[:conn].results_as_hash = true
 
-    sql = "pragma table_info('#{table_name}')"
+    sql = "pragma table_info(#{table_name})"
 
     table_info = DB[:conn].execute(sql)
     column_names = []
@@ -22,7 +22,7 @@ class Song
   end
 
   self.column_names.each do |col_name|
-    attr_accessor col_name.to_sym
+    attr_accessor col_name.to_sym #are these class variables?
   end
 
   def initialize(options={})
