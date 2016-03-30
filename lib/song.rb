@@ -1,28 +1,28 @@
 require_relative "../config/environment.rb"
-require 'active_support/inflector'
+require 'active_support/inflector' #helps with pluralize line 8
 
 class Song
 
 
-  def self.table_name
+  def self.table_name #generating a generalized table name
     self.to_s.downcase.pluralize
   end
 
-  def self.column_names
-    DB[:conn].results_as_hash = true
+  def self.column_names #fetching table names
+    DB[:conn].results_as_hash = true # get all the results as a hash
 
     sql = "pragma table_info('#{table_name}')"
 
     table_info = DB[:conn].execute(sql)
     column_names = []
     table_info.each do |row|
-      column_names << row["name"]
+      column_names << row["name"] #collect the column names as an array
     end
-    column_names.compact
+    column_names.compact #compact for any blanks
   end
 
   self.column_names.each do |col_name|
-    attr_accessor col_name.to_sym
+    attr_accessor col_name.to_sym #convert the names to a symbol
   end
 
   def initialize(options={})
@@ -31,7 +31,7 @@ class Song
     end
   end
 
-  def save
+  def save #save into the table and resturn the id of the last inserted row
     sql = "INSERT INTO #{table_name_for_insert} (#{col_names_for_insert}) VALUES (#{values_for_insert})"
     DB[:conn].execute(sql)
     @id = DB[:conn].execute("SELECT last_insert_rowid() FROM #{table_name_for_insert}")[0][0]
