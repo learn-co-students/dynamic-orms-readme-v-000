@@ -3,7 +3,7 @@ require 'active_support/inflector'
 
 class Song
 
-
+  #Song class to songs table, requires inflector
   def self.table_name
     self.to_s.downcase.pluralize
   end
@@ -21,6 +21,7 @@ class Song
     column_names.compact
   end
 
+  #Creating attr_accessors
   self.column_names.each do |col_name|
     attr_accessor col_name.to_sym
   end
@@ -37,6 +38,7 @@ class Song
     @id = DB[:conn].execute("SELECT last_insert_rowid() FROM #{table_name_for_insert}")[0][0]
   end
 
+  #Table name
   def table_name_for_insert
     self.class.table_name
   end
