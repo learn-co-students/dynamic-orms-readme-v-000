@@ -1,4 +1,5 @@
 require 'sqlite3'
+require 'pry'
 
 require_relative "../lib/song.rb"
 require_relative "../config/environment.rb"
@@ -9,4 +10,9 @@ puts "song name: " + song.name
 puts "song album: " + song.album
 song.save
 
-DB[:conn].execute("SELECT * FROM songs")
+# bright = Song.new(name: "Lua", album: "I'm Wide Awake")
+# puts "song name: " + bright.name
+# puts "song album: " + bright.album
+# bright.save
+
+DB[:conn].execute("SELECT * FROM songs WHERE name = 'Hello'")
