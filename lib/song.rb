@@ -1,3 +1,4 @@
+require 'pry'
 require_relative "../config/environment.rb"
 require 'active_support/inflector'
 
@@ -56,6 +57,14 @@ class Song
   def self.find_by_name(name)
     sql = "SELECT * FROM #{self.table_name} WHERE name = '#{name}'"
     DB[:conn].execute(sql)
+  end
+
+  def self.check_or_update(song_hash)
+    song_hash.each{|k, v| 
+      DB[:conn].execute("ALTER TABLE #{table_name} ADD COLUMN #{k.to_s} TEXT") if !column_names.include?(k.to_s)
+      attr_accessor k.to_sym
+      }
+  binding.pry
   end
 
 end
