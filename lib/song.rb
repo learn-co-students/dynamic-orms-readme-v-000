@@ -1,5 +1,4 @@
-require_relative "../config/environment.rb"
-require 'active_support/inflector'
+
 
 class Song
 
@@ -58,7 +57,11 @@ class Song
     DB[:conn].execute(sql)
   end
 
+  def self.find(id)
+    sql = <<-SQL
+      SELECT * FROM #{self.table_name} WHERE id = #{id}
+    SQL
+    DB[:conn].execute(sql)
+  end
+
 end
-
-
-
