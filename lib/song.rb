@@ -2,7 +2,7 @@ require_relative "../config/environment.rb"
 require 'active_support/inflector'
 
 class Song
-
+#dynamic ORM - super exciting!
 
   def self.table_name
     self.to_s.downcase.pluralize
