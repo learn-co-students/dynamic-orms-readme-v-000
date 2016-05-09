@@ -1,16 +1,21 @@
 require_relative "../config/environment.rb"
 require 'active_support/inflector'
+require 'pry'
+
 
 class Song
 
+  # we want the column names to create the attr_accessor
 
+  # creates a name for the table
   def self.table_name
     self.to_s.downcase.pluralize
+    #binding.pry
   end
 
   def self.column_names
     DB[:conn].results_as_hash = true
-
+        # return array of hashes fro mtable name
     sql = "pragma table_info('#{table_name}')"
 
     table_info = DB[:conn].execute(sql)
@@ -18,12 +23,14 @@ class Song
     table_info.each do |row|
       column_names << row["name"]
     end
+
+
     column_names.compact
   end
 
   self.column_names.each do |col_name|
-    attr_accessor col_name.to_sym
-  end
+     a =   attr_accessor col_name.to_sym
+    end
 
   def initialize(options={})
     options.each do |property, value|
