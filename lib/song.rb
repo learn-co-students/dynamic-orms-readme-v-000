@@ -1,3 +1,5 @@
+# wow, starting to miss 'hello world'!
+
 require_relative "../config/environment.rb"
 require 'active_support/inflector'
 
