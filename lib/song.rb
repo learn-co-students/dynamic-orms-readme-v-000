@@ -6,6 +6,8 @@ class Song
 
   def self.table_name
     self.to_s.downcase.pluralize
+    binding.pry
+    puts""
   end
 
   def self.column_names
