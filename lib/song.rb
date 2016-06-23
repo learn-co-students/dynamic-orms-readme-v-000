@@ -1,5 +1,6 @@
 require_relative "../config/environment.rb"
 require 'active_support/inflector'
+require 'pry'
 
 class Song
 
@@ -11,6 +12,7 @@ class Song
   def self.column_names
     DB[:conn].results_as_hash = true
 
+    binding.pry
     sql = "pragma table_info('#{table_name}')"
 
     table_info = DB[:conn].execute(sql)
@@ -46,7 +48,7 @@ class Song
     self.class.column_names.each do |col_name|
       values << "'#{send(col_name)}'" unless send(col_name).nil?
     end
-    values.join(", ")
+    values.delete_if {|col| values.size == 3 && col = values[0]}.join(", ")
   end
 
   def col_names_for_insert
