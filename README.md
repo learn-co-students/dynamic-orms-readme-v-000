@@ -120,7 +120,7 @@ end
 
 This method, which you'll see in the `Song` class in `lib/song.rb`, takes the name of the class, referenced by the `self` keyword, turns it into a string with `#to_s`, downcases (or "un-capitalizes") that string and then "pluralizes" it, or makes it plural.
 
-**Note:** The `#pluralize` method is provided to use the by `active_support/inflector` code library, required at the top of `lib/song.rb`.
+**Note:** The `#pluralize` method is provided to us by the `active_support/inflector` code library, required at the top of `lib/song.rb`.
 
 Now that we have a method that grabs us the table name we want to query for column names, let's build a method that actually grabs us those column names.
 
@@ -128,7 +128,7 @@ Now that we have a method that grabs us the table name we want to query for colu
 
 **Querying a table for column names:**
 
-How do you query a table for the names of it's columns? For this we need to use the following SQL query:
+How do you query a table for the names of its columns? For this we need to use the following SQL query:
 
 ```sql
 PRAGMA table_info(<table name>)
@@ -355,7 +355,7 @@ This will return:
 "name, album"
 ```
 
-Perfect! Now that we have all the code we need to grab a comma separated list of the column names of the table associated with any given class.
+Perfect! Now we have all the code we need to grab a comma separated list of the column names of the table associated with any given class.
 
 We can wrap up this code in a handy method, **`#col_names_for_insert`:**
 
@@ -465,3 +465,5 @@ Now that we have all of these great dynamic, abstract methods that connect a cla
 <a href='https://learn.co/lessons/dynamic-orms-readme' data-visibility='hidden'>View this lesson on Learn.co</a>
 
 <p data-visibility='hidden'>View <a href='https://learn.co/lessons/dynamic-orms-readme'>Dynamic ORMs</a> on Learn.co and start learning to code for free.</p>
+
+<p class='util--hide'>View <a href='https://learn.co/lessons/dynamic-orms-readme'>Dynamic ORMs</a> on Learn.co and start learning to code for free.</p>
