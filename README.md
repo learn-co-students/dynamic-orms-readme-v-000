@@ -8,7 +8,7 @@
 
 ## Why Dynamic ORMs?
 
-As developers, we understand the need for our Ruby programs to be able to connect with a database. Any complex application is going to need to persist some data. Along with this need, we recognize the need for the connection between our program and our database to be, like all of our code, organized and sensical. That is why we use the ORM design pattern in which a Ruby class is mapped to a database table and instances of that class are represented as rows in that table.
+As developers, we understand the need for our Ruby programs to be able to connect with a database. Any complex application is going to need to persist some data. Along with this need, we recognize the need for the connection between our program and our database to be, like all of our code, organized and sensible. That is why we use the ORM design pattern in which a Ruby class is mapped to a database table and instances of that class are represented as rows in that table.
 
 We can implement this mapping by using a class to create a database table:
 
@@ -40,16 +40,16 @@ Here, we create our `songs` table, so-named because we are mapping this table to
 
 This is one way to map our program to our database, but it has some limitations. For one thing, our `#create_table` method is dependent on our knowing exactly what to name our table and columns. So, every class in our program would require us to re-write this `#create_table` method, swapping out different table and column names each time. This is repetitive. As you know, we programmers are lazy and we hate to repeat ourselves. Any smelly, repetitious code, begs the question: can we abstract this into a re-usable method? In this case––can we extract our class-specific `#create_table` method into one that is flexible and abstract and be used across any class?
 
-Well, with a dynamic ORM, we can abstract all of our conventional ORM methods into just such flexible, abstract and share-able methods.
+Well, with a dynamic ORM, we can abstract all of our conventional ORM methods into just such flexible, abstract, and shareable methods.
 
 ## What is a Dynamic ORM?
 
 A dynamic ORM allows us to map an existing database table to a class and write methods that can use nothing more than information regarding a specific database table to:
 
 * Create `attr_accessors` for a Ruby class.
-* Create shareable methods for inserting, updating, selecting and deleting data from the database table.
+* Create shareable methods for inserting, updating, selecting, and deleting data from the database table.
 
-This pattern, of first creating the database table and having your program do all the work of writing your ORM methods for you, based on that table, is exactly how we will develop web applications in Sinatra and Rails.
+This pattern –– first creating the database table and having your program do all the work of writing your ORM methods for you, based on that table –– is exactly how we will develop web applications in Sinatra and Rails.
 
 ## Creating Our ORM
 
@@ -120,7 +120,7 @@ end
 
 This method, which you'll see in the `Song` class in `lib/song.rb`, takes the name of the class, referenced by the `self` keyword, turns it into a string with `#to_s`, downcases (or "un-capitalizes") that string and then "pluralizes" it, or makes it plural.
 
-**Note:** The `#pluralize` method is provided to use the by `active_support/inflector` code library, required at the top of `lib/song.rb`.
+**Note:** The `#pluralize` method is provided to us by the `active_support/inflector` code library, required at the top of `lib/song.rb`.
 
 Now that we have a method that grabs us the table name we want to query for column names, let's build a method that actually grabs us those column names.
 
@@ -128,7 +128,7 @@ Now that we have a method that grabs us the table name we want to query for colu
 
 **Querying a table for column names:**
 
-How do you query a table for the names of it's columns? For this we need to use the following SQL query:
+How do you query a table for the names of its columns? For this we need to use the following SQL query:
 
 ```sql
 PRAGMA table_info(<table name>)
@@ -185,13 +185,13 @@ Now that we know how to get information about each column from our table, let's 
 def self.column_names
   DB[:conn].results_as_hash = true
 
-  sql = "pragma table_info('#{table_name}')"
+  sql = "PRAGMA table_info('#{table_name}')"
 
   table_info = DB[:conn].execute(sql)
   column_names = []
 
-  table_info.each do |row|
-    column_names << row["name"]
+  table_info.each do |column|
+    column_names << column["name"]
   end
 
   column_names.compact
@@ -262,11 +262,11 @@ end
 
 Here, we define our method to take in an argument of `options`, which defaults to an empty hash. We expect `#new` to be called with a hash, so when we refer to `options` inside the `#initialize` method, we expect to be operating on a hash.
 
-We iterate over the `options` hash and use our fancy metaprogramming `#send` method to interpolate the name of each hash key as a method that we set equal to that key's value. As long as each `property` has a corresponding `attr_accessor`, this `#initalize` method will work.
+We iterate over the `options` hash and use our fancy metaprogramming `#send` method to interpolate the name of each hash key as a method that we set equal to that key's value. As long as each `property` has a corresponding `attr_accessor`, this `#initialize` method will work.
 
 ## Step 4: Writing our ORM Methods
 
-Let's move on to write some of the conventional ORM methods, like `#save` and `#find_by_name` in a dynamic fashion. In other words, we will write these methods to be abstract, not specific to the `Song` class, so that we can later extract them and share them among any number of classes.
+Let's move on to writing some of the conventional ORM methods, like `#save` and `#find_by_name`, in a dynamic fashion. In other words, we will write these methods to be abstract, not specific to the `Song` class, so that we can later extract them and share them among any number of classes.
 
 ### Saving Records in a Dynamic Manner
 
@@ -277,7 +277,7 @@ INSERT INTO songs (name, album)
 VALUES 'Hello', '25';
 ```
 
-In order to write a method that can `INSERT` any record to any table, we need to be able to craft the above SQL statement without explicitly referencing the songs table or column names and without explicitly referencing the values of a given song instance.
+In order to write a method that can `INSERT` any record to any table, we need to be able to craft the above SQL statement without explicitly referencing the `songs` table or column names and without explicitly referencing the values of a given `Song` instance.
 
 Let's take this one step at a time.
 
@@ -299,7 +299,7 @@ So, to access the table name we want to `INSERT` into from inside our `#save` me
 self.class.table_name
 ```
 
-We can wrap up this code in a handy method, **`#table_name_for_insert`:**
+We can wrap up this code in a handy method, **`#table_name_for_insert`**:
 
 ```ruby
 def table_name_for_insert
@@ -311,7 +311,7 @@ Great, now let's grab our column names in an abstract manner.
 
 #### Abstracting the Column Names
 
-We already have a handy method for grabbing the column names of the table associated with given class:
+We already have a handy method for grabbing the column names of the table associated with a given class:
 
 ```ruby
 self.class.column_names
@@ -355,9 +355,9 @@ This will return:
 "name, album"
 ```
 
-Perfect! Now that we have all the code we need to grab a comma separated list of the column names of the table associated with any given class.
+Perfect! Now we have all the code we need to grab a comma separated list of the column names of the table associated with any given class.
 
-We can wrap up this code in a handy method, **`#col_names_for_insert`:**
+We can wrap up this code in a handy method, **`#col_names_for_insert`**:
 
 ```ruby
 def col_names_for_insert
@@ -369,7 +369,7 @@ Lastly, we need an abstract way to grab the *values* we want to insert.
 
 #### Abstracting the Values to Insert
 
-When inserting a row into our table, we grab the values to insert by grabbing the values of that instance's `attr_readers`s. How can we grab these values without calling the reader methods by name?
+When inserting a row into our table, we grab the values to insert by grabbing the values of that instance's `attr_reader`s. How can we grab these values without calling the reader methods by name?
 
 Let's break this down.
 
@@ -403,7 +403,7 @@ SQL expects us to pass in each column value in single quotes.
 The above code, however, will result in a `values` array
 
 ```ruby
-[" 'the name of the song' ", " 'the album of the song' "]
+["'the name of the song'", "'the album of the song'"]
 ```
 
 We need comma separated values for our SQL statement. Let's join this array into a string:
@@ -461,7 +461,5 @@ Now that we have all of these great dynamic, abstract methods that connect a cla
 [SQLite- PRAGMA](http://www.tutorialspoint.com/sqlite/sqlite_pragma.htm)
 
 [PRAGMA](https://www.sqlite.org/pragma.html#pragma_table_info)
-
-<a href='https://learn.co/lessons/dynamic-orms-readme' data-visibility='hidden'>View this lesson on Learn.co</a>
 
 <p data-visibility='hidden'>View <a href='https://learn.co/lessons/dynamic-orms-readme'>Dynamic ORMs</a> on Learn.co and start learning to code for free.</p>
