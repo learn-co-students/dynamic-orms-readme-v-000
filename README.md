@@ -463,3 +463,5 @@ Now that we have all of these great dynamic, abstract methods that connect a cla
 [PRAGMA](https://www.sqlite.org/pragma.html#pragma_table_info)
 
 <p data-visibility='hidden'>View <a href='https://learn.co/lessons/dynamic-orms-readme'>Dynamic ORMs</a> on Learn.co and start learning to code for free.</p>
+
+<p class='util--hide'>View <a href='https://learn.co/lessons/dynamic-orms-readme'>Dynamic ORMs</a> on Learn.co and start learning to code for free.</p>
