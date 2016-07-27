@@ -58,6 +58,15 @@ class Song
     DB[:conn].execute(sql)
   end
 
+  # We can use heredoc and bound parameters instead as seen below
+  # def self.find_by_name(name)
+   # sql =  <<-SQL
+   # SELECT * 
+   # FROM ?
+   # WHERE name = ?
+   # DB[:conn].execute(sql, self.table_name, name)
+  # end
+  
 end
 
 
