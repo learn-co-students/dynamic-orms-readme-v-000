@@ -8,6 +8,7 @@ class Song
     self.to_s.downcase.pluralize
   end
 
+  # Pragma will return to us a array of hashes describing th etable itself.
   def self.column_names
     DB[:conn].results_as_hash = true
 
@@ -25,6 +26,8 @@ class Song
     attr_accessor col_name.to_sym
   end
 
+  # Options defaults to an empty hash
+  # Send method interpolates the name of each hash key as a method that we set equal to that key's value.
   def initialize(options={})
     options.each do |property, value|
       self.send("#{property}=", value)
@@ -37,6 +40,7 @@ class Song
     @id = DB[:conn].execute("SELECT last_insert_rowid() FROM #{table_name_for_insert}")[0][0]
   end
 
+  # In order to use a class method inside an instance method, we need to do the following:
   def table_name_for_insert
     self.class.table_name
   end
