@@ -1,8 +1,10 @@
 require_relative "../config/environment.rb"
 require 'active_support/inflector'
+require 'pry'
 
 class Song
 
+##this is how you dynamically make an SQL table from a class.
 
   def self.table_name
     self.to_s.downcase.pluralize
