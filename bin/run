@@ -9,4 +9,10 @@ puts "song name: " + song.name
 puts "song album: " + song.album
 song.save
 
-DB[:conn].execute("SELECT * FROM songs")
+dup = Song.new(name: "Hello", album: "25")
+dup.save
+
+puts "Current songs in DB..."
+DB[:conn].execute("SELECT * FROM songs").each do |row|
+  puts "ID: #{row[0]} - NAME: #{row[1]} - ALBUM: #{row[2]}"
+end
