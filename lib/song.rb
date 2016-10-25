@@ -1,5 +1,6 @@
 require_relative "../config/environment.rb"
 require 'active_support/inflector'
+require 'pry'
 
 class Song
 
@@ -58,7 +59,10 @@ class Song
     DB[:conn].execute(sql)
   end
 
+  def display
+    self.class.column_names.each do |column_name|
+      puts self.class.to_s.downcase + " #{column_name}: " + "#{send(column_name)}"
+    end
+  end
+
 end
-
-
-
