@@ -19,6 +19,7 @@ class Song
       column_names << row["name"]
     end
     column_names.compact
+    # compact gets rid of any nil values that mayb end up in our collection
   end
 
   self.column_names.each do |col_name|
@@ -59,6 +60,3 @@ class Song
   end
 
 end
-
-
-
