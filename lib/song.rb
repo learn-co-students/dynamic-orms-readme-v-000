@@ -1,5 +1,5 @@
 require_relative "../config/environment.rb"
-require 'active_support/inflector'
+require_relative '../vendor/bundle/ruby/2.3.0/gems/activesupport-5.0.0.1/lib/active_support/inflector.rb'
 
 class Song
 
