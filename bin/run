@@ -4,9 +4,28 @@ require_relative "../lib/song.rb"
 require_relative "../config/environment.rb"
 
 
-song = Song.new(name: "Hello", album: "25")
-puts "song name: " + song.name
-puts "song album: " + song.album
-song.save
+song1 = Song.new(name: "Hello", album: "25")
+# puts "song name: " + song1.name
+# puts "song album: " + song1.album
+song1.save
 
-DB[:conn].execute("SELECT * FROM songs")
+song2 = Song.new(name: "St Thomas", album: "Tenor Madness")
+song2.save
+
+song3 = Song.new(name: "Head Over Heels", album: "Songs from the Big Chair")
+song3.save
+
+puts DB[:conn].execute("SELECT * FROM songs")
+
+song4 = Song.find_by_name("St Thomas")
+song5 = Song.find_by_name("El Guapachoso")
+[song4,song5].each do |song| 
+  if !!song[0]
+    puts song
+  else
+    puts "No song by that name"
+  end
+end
+
+puts song4.class
+puts song5.class
