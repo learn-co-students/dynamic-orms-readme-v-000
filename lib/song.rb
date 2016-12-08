@@ -3,7 +3,8 @@ require 'active_support/inflector'
 
 class Song
 
-
+  @@all = []
+  
   def self.table_name
     self.to_s.downcase.pluralize
   end
@@ -56,6 +57,29 @@ class Song
   def self.find_by_name(name)
     sql = "SELECT * FROM #{self.table_name} WHERE name = '#{name}'"
     DB[:conn].execute(sql)
+  end
+
+  def self.all
+    sql = <<-SQL
+      SELECT * FROM #{table_name_for_insert}
+    SQL
+
+    DB[:conn].execute(sql).map  do |row|
+      @@all << self.refiy_from_row(row)
+    end  
+  end
+
+  def self.refiy_from_row(row)
+    data = self.hash_from_row(row)
+    self.new(data)   
+  end
+
+  def self.hash_from_row(row)
+    hash_data = {}
+    self.column_names.each.with_index do |col_name, index|
+      hash_data[":#{col_name}"] = row[index]
+    end
+    hash_data
   end
 
 end
