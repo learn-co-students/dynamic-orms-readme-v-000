@@ -1,5 +1,6 @@
 require_relative "../config/environment.rb"
 require 'active_support/inflector'
+require 'pry'
 
 class Song
 
@@ -9,6 +10,7 @@ class Song
   end
 
   def self.column_names
+    binding.pry
     DB[:conn].results_as_hash = true
 
     sql = "pragma table_info('#{table_name}')"
@@ -17,6 +19,7 @@ class Song
     column_names = []
     table_info.each do |row|
       column_names << row["name"]
+
     end
     column_names.compact
   end
@@ -33,6 +36,7 @@ class Song
 
   def save
     sql = "INSERT INTO #{table_name_for_insert} (#{col_names_for_insert}) VALUES (#{values_for_insert})"
+
     DB[:conn].execute(sql)
     @id = DB[:conn].execute("SELECT last_insert_rowid() FROM #{table_name_for_insert}")[0][0]
   end
@@ -59,6 +63,3 @@ class Song
   end
 
 end
-
-
-
