@@ -5,8 +5,28 @@ require_relative "../config/environment.rb"
 
 
 song = Song.new(name: "Hello", album: "25")
-puts "song name: " + song.name
-puts "song album: " + song.album
+
 song.save
 
-DB[:conn].execute("SELECT * FROM songs")
+puts "Song.table_name:"
+p Song.table_name
+
+puts "--------------------------"
+
+puts "Song.column_names:"
+p Song.column_names
+
+puts "--------------------------"
+
+puts "song.table_name_for_insert:"
+p song.table_name_for_insert
+
+puts "--------------------------"
+
+puts "song.values_for_insert:"
+p song.values_for_insert
+
+puts "--------------------------"
+
+puts "song.col_names_for_insert:"
+p song.col_names_for_insert
