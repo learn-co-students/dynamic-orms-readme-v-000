@@ -1,5 +1,6 @@
 require_relative "../config/environment.rb"
 require 'active_support/inflector'
+require 'pry'
 
 class Song
 
@@ -14,6 +15,7 @@ class Song
     sql = "pragma table_info('#{table_name}')"
 
     table_info = DB[:conn].execute(sql)
+
     column_names = []
     table_info.each do |row|
       column_names << row["name"]
@@ -59,6 +61,3 @@ class Song
   end
 
 end
-
-
-
