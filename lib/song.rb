@@ -1,5 +1,6 @@
 require_relative "../config/environment.rb"
 require 'active_support/inflector'
+require 'pry'
 
 class Song
 
@@ -23,11 +24,13 @@ class Song
 
   self.column_names.each do |col_name|
     attr_accessor col_name.to_sym
+    binding.pry
   end
 
   def initialize(options={})
     options.each do |property, value|
       self.send("#{property}=", value)
+      binding.pry
     end
   end
 
@@ -45,8 +48,10 @@ class Song
     values = []
     self.class.column_names.each do |col_name|
       values << "'#{send(col_name)}'" unless send(col_name).nil?
+      binding.pry
     end
     values.join(", ")
+
   end
 
   def col_names_for_insert
@@ -59,6 +64,3 @@ class Song
   end
 
 end
-
-
-
