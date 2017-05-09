@@ -11,6 +11,8 @@ class Song
   def self.column_names
     DB[:conn].results_as_hash = true
 
+    # To understand better PRAGMA, run this in Bash
+    # sqlite3 ./db/songs.db ".mode column" ".headers on" ".width auto" "pragma table_info('songs')"
     sql = "pragma table_info('#{table_name}')"
 
     table_info = DB[:conn].execute(sql)
@@ -59,6 +61,3 @@ class Song
   end
 
 end
-
-
-
