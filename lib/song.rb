@@ -1,15 +1,13 @@
-require_relative "../config/environment.rb"
+require_relative '../config/environment.rb'
 require 'active_support/inflector'
 
 class Song
-
-
   def self.table_name
     self.to_s.downcase.pluralize
   end
 
   def self.column_names
-    DB[:conn].results_as_hash = true
+    DB[:conn].results_as_hash = true # this is not needed, results_as_hash config in environment
 
     sql = "pragma table_info('#{table_name}')"
 
@@ -57,8 +55,4 @@ class Song
     sql = "SELECT * FROM #{self.table_name} WHERE name = '#{name}'"
     DB[:conn].execute(sql)
   end
-
 end
-
-
-
