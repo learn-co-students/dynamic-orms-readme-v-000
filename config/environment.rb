@@ -1,4 +1,5 @@
 require 'sqlite3'
+require 'pry-byebug'
 
 
 DB = {:conn => SQLite3::Database.new("db/songs.db")}
