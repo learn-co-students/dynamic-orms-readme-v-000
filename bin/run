@@ -1,12 +1,18 @@
 require 'sqlite3'
+require 'pry'
+
 
 require_relative "../lib/song.rb"
 require_relative "../config/environment.rb"
 
+Song.new(name: "Pie IX", album: "Zeroes QC").save
+Song.new(name: "Like Soda", album: "WACO").save
+Song.new(name: "Last Nite", album: "Is This It").save
+Song.new(name: "Paint Me Silver", album: "The Weather").save
 
-song = Song.new(name: "Hello", album: "25")
-puts "song name: " + song.name
-puts "song album: " + song.album
-song.save
+DB[:conn].execute("SELECT * FROM songs").each do |song|
+    puts "#{song["id"]}. #{song["name"]} from #{song["album"]}"
+end
 
-DB[:conn].execute("SELECT * FROM songs")
+found_song = Song.find_by_name("Like Soda").first
+puts "I found #{found_song["name"]} from #{found_song["album"]} for you!"
