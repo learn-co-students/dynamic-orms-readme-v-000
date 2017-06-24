@@ -1,7 +1,10 @@
 require 'sqlite3'
+require 'pry'
+require 'rake'
 
+#DB = {:conn => SQLite3::Database.new("db/songs.db")}
+DB = {:conn => SQLite3::Database.new("db/songs.sqlite")}
 
-DB = {:conn => SQLite3::Database.new("db/songs.db")}
 DB[:conn].execute("DROP TABLE IF EXISTS songs")
 
 sql = <<-SQL
