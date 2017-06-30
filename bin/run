@@ -10,3 +10,4 @@ puts "song album: " + song.album
 song.save
 
 DB[:conn].execute("SELECT * FROM songs")
+DB[:conn].execute("SELECT * FROM songs ORDER BY name")
