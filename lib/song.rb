@@ -13,12 +13,12 @@ class Song
 
     sql = "pragma table_info('#{table_name}')"
 
-    table_info = DB[:conn].execute(sql)
+    table_info = DB[:conn].execute(sql) #returns an array of hashes
     column_names = []
     table_info.each do |row|
-      column_names << row["name"]
+      column_names << row["name"] #collects "name" only
     end
-    column_names.compact
+    column_names.compact #nil elements removed and return: ["id", "name", "album"]
   end
 
   self.column_names.each do |col_name|
@@ -50,7 +50,7 @@ class Song
   end
 
   def col_names_for_insert
-    self.class.column_names.delete_if {|col| col == "id"}.join(", ")
+    self.class.column_names.delete_if {|col| col == "id"}.join(", ") #before .join, it returns an array. Now it should return "value1, value2"
   end
 
   def self.find_by_name(name)
@@ -59,6 +59,3 @@ class Song
   end
 
 end
-
-
-
