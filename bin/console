@@ -1,0 +1,19 @@
+#!/usr/local/bin/ruby
+
+require "pry"
+require 'sqlite3'
+
+load "./lib/song.rb"
+
+song = Song.new(name: "Hello", album: "25")
+puts "song name: " + song.name
+puts "song album: " + song.album
+song.save
+
+DB[:conn].execute("SELECT * FROM songs")
+
+def reload!
+  load "./lib/song.rb"
+end
+
+pry.start
