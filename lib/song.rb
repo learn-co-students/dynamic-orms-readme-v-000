@@ -1,5 +1,6 @@
 require_relative "../config/environment.rb"
 require 'active_support/inflector'
+require "pry"
 
 class Song
 
@@ -47,6 +48,7 @@ class Song
       values << "'#{send(col_name)}'" unless send(col_name).nil?
     end
     values.join(", ")
+    binding.pry
   end
 
   def col_names_for_insert
@@ -59,6 +61,3 @@ class Song
   end
 
 end
-
-
-
