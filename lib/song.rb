@@ -3,7 +3,6 @@ require 'active_support/inflector'
 
 class Song
 
-
   def self.table_name
     self.to_s.downcase.pluralize
   end
@@ -21,6 +20,7 @@ class Song
     column_names.compact
   end
 
+ # This is so cool!!
   self.column_names.each do |col_name|
     attr_accessor col_name.to_sym
   end
@@ -59,6 +59,3 @@ class Song
   end
 
 end
-
-
-
