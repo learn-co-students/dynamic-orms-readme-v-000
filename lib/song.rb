@@ -1,14 +1,14 @@
 require_relative "../config/environment.rb"
-require 'active_support/inflector'
+require 'active_support/inflector' #pluralize is needed from this.
 
 class Song
 
 
-  def self.table_name
+  def self.table_name #Song #=> songs
     self.to_s.downcase.pluralize
   end
 
-  def self.column_names
+  def self.column_names # attr_accessor :id, :name, :album
     DB[:conn].results_as_hash = true
 
     sql = "pragma table_info('#{table_name}')"
@@ -25,14 +25,18 @@ class Song
     attr_accessor col_name.to_sym
   end
 
-  def initialize(options={})
+  def initialize(options={}) #options is by default an empty hash
     options.each do |property, value|
       self.send("#{property}=", value)
     end
   end
+  #Song.new(name: "Hello", album: "25")
+  #song.name #=> "Hello"
+  #song.album #=> "25"
 
   def save
     sql = "INSERT INTO #{table_name_for_insert} (#{col_names_for_insert}) VALUES (#{values_for_insert})"
+                        #songs                      name, album               "hello", "25"
     DB[:conn].execute(sql)
     @id = DB[:conn].execute("SELECT last_insert_rowid() FROM #{table_name_for_insert}")[0][0]
   end
@@ -59,6 +63,3 @@ class Song
   end
 
 end
-
-
-
