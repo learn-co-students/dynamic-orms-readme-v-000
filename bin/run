@@ -9,6 +9,9 @@ puts "song name: " + song.name
 puts "song album: " + song.album
 song.save
 
+puts DB[:conn].execute('PRAGMA schema.table_info(songs)')
+
+
 song2 = Song.new(name: "yo", album: "fred")
 song4 = Song.new(name: "yo1", album: "fred")
 song43 = Song.new(name: "yo2", album: "fred")
