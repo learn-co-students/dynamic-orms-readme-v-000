@@ -60,5 +60,7 @@ class Song
 
 end
 
+#added a practice method
+
 
 
