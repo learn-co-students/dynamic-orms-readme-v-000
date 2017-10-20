@@ -1,12 +1,16 @@
+#!/usr/bin/env ruby
+
 require 'sqlite3'
 
 require_relative "../lib/song.rb"
 require_relative "../config/environment.rb"
 
 
-song = Song.new(name: "Hello", album: "25")
-puts "song name: " + song.name
-puts "song album: " + song.album
-song.save
+hello = Song.new(name: "Hello", album: "25")
+biggie = Song.new(name: "NOTORIOUS", album: "NOTORIOUS")
+biggie = Song.new(name: "NOTORIOUS", album: "NOTORIOUS")
+hello.save
+biggie.save
+biggie.save
 
 DB[:conn].execute("SELECT * FROM songs")
