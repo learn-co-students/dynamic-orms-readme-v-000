@@ -5,8 +5,41 @@ require_relative "../config/environment.rb"
 
 
 song = Song.new(name: "Hello", album: "25")
-puts "song name: " + song.name
-puts "song album: " + song.album
 song.save
 
-DB[:conn].execute("SELECT * FROM songs")
+song_two = Song.new(name: "Little Lion Man", album: "Sigh No More")
+song_two.save
+
+song_three = Song.new(name: "Submarines", album: "The Lumineers")
+song_three.save
+
+song_four = Song.new(name: "Bohemian Rhapsody", album: "A Night at the Opera")
+song_four.save
+
+song_five = Song.new(name: "39", album: "A Night at the Opera")
+song_five.save
+
+
+found_song = Song.find_by_name("Little Lion Man")[0]
+puts found_song
+
+puts DB[:conn].execute("SELECT * FROM songs WHERE album = 'A Night at the Opera'")
+
+puts "------------------"
+Song.column_names.each do |col|
+  puts "#{col}: #{song_four.send(col)}"
+end
+puts "------------------"
+
+puts "#{song_three.send(Song.column_names[0])} - #{song_three.send(Song.column_names[1])} - #{song_three.send(Song.column_names[2])}"
+
+new_song = Song.new
+new_song.name = found_song["name"]
+new_song.album = found_song["album"]
+
+puts "#{new_song.name} from #{new_song.album}"
+
+song_six = Song.new(name: "Somebody to Love", album: "A Day at the Races")
+song_six.save
+
+puts DB[:conn].execute("SELECT album FROM songs WHERE name = 'Somebody to Love'")[0]["album"]
