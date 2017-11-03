@@ -5,8 +5,11 @@ require_relative "../config/environment.rb"
 
 
 song = Song.new(name: "Wild Things", album: "Know-It-All")
-puts "song name: " + song.name
-puts "song album: " + song.album
 song.save
 
-DB[:conn].execute("SELECT * FROM songs")
+song_2 = Song.new(name: "Four Pink Walls", album: "Know-It-All")
+song_2.save
+
+
+instruction = DB[:conn].execute("SELECT * FROM songs ORDER BY name LIMIT 1")
+puts instruction
