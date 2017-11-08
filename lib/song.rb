@@ -21,6 +21,7 @@ class Song
     column_names.compact
   end
 
+#TN: Note that this is an executable action -- it is not a method (it does not being with def)
   self.column_names.each do |col_name|
     attr_accessor col_name.to_sym
   end
@@ -59,6 +60,3 @@ class Song
   end
 
 end
-
-
-
