@@ -60,5 +60,4 @@ class Song
 
 end
 
-
-
+p = Song.table_name
