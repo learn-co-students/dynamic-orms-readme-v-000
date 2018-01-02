@@ -4,11 +4,11 @@ require 'active_support/inflector'
 class Song
 
 
-  def self.table_name
+  def self.table_name                           #takes class name into string/lowercase/pluralize
     self.to_s.downcase.pluralize
   end
 
-  def self.column_names
+  def self.column_names                         #query table for col names, return hash
     DB[:conn].results_as_hash = true
 
     sql = "pragma table_info('#{table_name}')"
@@ -16,17 +16,17 @@ class Song
     table_info = DB[:conn].execute(sql)
     column_names = []
     table_info.each do |row|
-      column_names << row["name"]
+      column_names << row["name"]                   #grab just the name of each column
     end
     column_names.compact
   end
 
-  self.column_names.each do |col_name|
+  self.column_names.each do |col_name|              #convert string to symbol bc attr_accessor must be named with symbols
     attr_accessor col_name.to_sym
   end
 
-  def initialize(options={})
-    options.each do |property, value|
+  def initialize(options={})                        #takes in argument set as empty hash
+    options.each do |property, value|               #use send method to grab name of hash key as a method to set to the value
       self.send("#{property}=", value)
     end
   end
@@ -37,19 +37,19 @@ class Song
     @id = DB[:conn].execute("SELECT last_insert_rowid() FROM #{table_name_for_insert}")[0][0]
   end
 
-  def table_name_for_insert
+  def table_name_for_insert                   #grabs the table name we set earlier
     self.class.table_name
   end
 
-  def values_for_insert
-    values = []
+  def values_for_insert                       #iterate over col names and use send to
+    values = []                               #invoke method by that name ans capture value
     self.class.column_names.each do |col_name|
       values << "'#{send(col_name)}'" unless send(col_name).nil?
     end
     values.join(", ")
   end
 
-  def col_names_for_insert
+  def col_names_for_insert                   #grab column names except id
     self.class.column_names.delete_if {|col| col == "id"}.join(", ")
   end
 
@@ -59,6 +59,3 @@ class Song
   end
 
 end
-
-
-
