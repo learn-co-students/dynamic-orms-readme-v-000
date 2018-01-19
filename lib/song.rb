@@ -3,7 +3,6 @@ require 'active_support/inflector'
 
 class Song
 
-
   def self.table_name
     self.to_s.downcase.pluralize
   end
@@ -15,9 +14,11 @@ class Song
 
     table_info = DB[:conn].execute(sql)
     column_names = []
+
     table_info.each do |row|
       column_names << row["name"]
     end
+
     column_names.compact
   end
 
@@ -46,6 +47,7 @@ class Song
     self.class.column_names.each do |col_name|
       values << "'#{send(col_name)}'" unless send(col_name).nil?
     end
+
     values.join(", ")
   end
 
@@ -59,6 +61,3 @@ class Song
   end
 
 end
-
-
-
