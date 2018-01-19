@@ -1,3 +1,9 @@
+=begin
+
+I promise I understand the theory behind a dynamic ORM well...
+
+=end
+
 require_relative "../config/environment.rb"
 require 'active_support/inflector'
 
