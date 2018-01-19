@@ -8,6 +8,8 @@ class Song
     self.to_s.downcase.pluralize
   end
 
+  #takes the name of a class and turns it into a string 
+
   def self.column_names
     DB[:conn].results_as_hash = true
 
@@ -59,6 +61,8 @@ class Song
   end
 
 end
+
+
 
 
 
