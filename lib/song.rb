@@ -58,7 +58,8 @@ class Song
     DB[:conn].execute(sql)
   end
 
+  def self.update(name)
+    sql = "UPDATE #{self.table_name}"
+  end
+
 end
-
-
-
