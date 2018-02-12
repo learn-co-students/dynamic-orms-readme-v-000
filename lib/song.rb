@@ -1,5 +1,6 @@
 require_relative "../config/environment.rb"
 require 'active_support/inflector'
+require 'pry'
 
 class Song
 
@@ -11,14 +12,17 @@ class Song
   def self.column_names
     DB[:conn].results_as_hash = true
 
-    sql = "pragma table_info('#{table_name}')"
-
-    table_info = DB[:conn].execute(sql)
-    column_names = []
-    table_info.each do |row|
-      column_names << row["name"]
-    end
-    column_names.compact
+    # sql = "pragma table_info('#{table_name}')"
+    #
+    # table_info = DB[:conn].execute(sql)
+    # column_names = []
+    # table_info.each do |row|
+    #   column_names << row["name"]
+    # end
+    # column_names.compact
+    sql = "SELECT * FROM #{self.table_name}"
+    result = DB[:conn].execute(sql)
+    binding.pry
   end
 
   self.column_names.each do |col_name|
@@ -59,6 +63,3 @@ class Song
   end
 
 end
-
-
-
