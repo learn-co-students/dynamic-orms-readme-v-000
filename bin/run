@@ -1,12 +1,27 @@
 require 'sqlite3'
 
-require_relative "../lib/song.rb"
-require_relative "../config/environment.rb"
+require_relative '../lib/song.rb'
+require_relative '../config/environment.rb'
 
-
-song = Song.new(name: "Hello", album: "25")
-puts "song name: " + song.name
-puts "song album: " + song.album
+song = Song.new(name: 'Hello', album: '25')
+puts 'song name: ' + song.name
+puts 'song album: ' + song.album
 song.save
 
-DB[:conn].execute("SELECT * FROM songs")
+song = Song.new(name: 'Blank space', album: '1989')
+puts 'song name: ' + song.name
+puts 'song album: ' + song.album
+song.save
+
+song = Song.new(name: 'Angel with a shotgun', album: 'Symphony soldier')
+puts 'song name: ' + song.name
+puts 'song album: ' + song.album
+song.save
+
+song = Song.new(name: 'Requiem',album: '')
+puts 'song name: ' + song.name
+song.save
+
+DB[:conn].execute('SELECT * FROM songs')
+
+puts DB[:conn].execute('SELECT * FROM songs').to_s
