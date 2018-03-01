@@ -98,7 +98,7 @@ It will return something that looks like this:
 {"id"=>1, "name"=>"Hello", "album"=>"25", 0 => 1, 1 => "Hello", 2 => "25"}
 ```
 
-This will be helpful to us as we use information requested from our database table to build attributes and methods on our `Song` class, but more on that later.
+This will be helpful to us as we use information requested from our database table to build attributes and methods on our `Song` class, but more on that later....
 
 Okay, now that we see how our database and table have been set up, let's move onto metaprogramming our `Song` class using information from our database.
 
