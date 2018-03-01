@@ -4,7 +4,7 @@ require 'active_support/inflector'
 class Song
 
 
-  def self.table_name
+  def self.table_names
     self.to_s.downcase.pluralize
   end
 
@@ -59,6 +59,3 @@ class Song
   end
 
 end
-
-
-
