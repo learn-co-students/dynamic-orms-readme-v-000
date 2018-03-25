@@ -1,5 +1,6 @@
+require 'pry'
 require_relative "../config/environment.rb"
-require 'active_support/inflector'
+require 'active_support/inflector' #required to pluralize a string
 
 class Song
 
@@ -11,21 +12,21 @@ class Song
   def self.column_names
     DB[:conn].results_as_hash = true
 
-    sql = "pragma table_info('#{table_name}')"
+    sql = "pragma table_info('#{table_name}')" #queries for the table names and returns a hash
 
     table_info = DB[:conn].execute(sql)
     column_names = []
     table_info.each do |row|
-      column_names << row["name"]
+      column_names << row["name"] #this iterates over the array of hashes to just get the names of each column we want
     end
-    column_names.compact
+    column_names.compact #gets rid of any nil values
   end
 
   self.column_names.each do |col_name|
-    attr_accessor col_name.to_sym
+    attr_accessor col_name.to_sym #converts each column: "id" > :id
   end
 
-  def initialize(options={})
+  def initialize(options={}) #initialize will take in a hash of keys and values
     options.each do |property, value|
       self.send("#{property}=", value)
     end
@@ -49,7 +50,7 @@ class Song
     values.join(", ")
   end
 
-  def col_names_for_insert
+  def col_names_for_insert #we don't need to initialize with :id because that's set when saved to the table
     self.class.column_names.delete_if {|col| col == "id"}.join(", ")
   end
 
@@ -59,6 +60,3 @@ class Song
   end
 
 end
-
-
-
