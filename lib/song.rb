@@ -3,7 +3,8 @@ require 'active_support/inflector'
 
 class Song
 
-
+  #self refers to the class (Song). turn it into a string (#to_s), make it all lowercase(#downcase)
+  #and add an -s to the end (#pluralize)
   def self.table_name
     self.to_s.downcase.pluralize
   end
@@ -11,7 +12,7 @@ class Song
   def self.column_names
     DB[:conn].results_as_hash = true
 
-    sql = "pragma table_info('#{table_name}')"
+    sql = "pragma table_info('#{table_name}')" 
 
     table_info = DB[:conn].execute(sql)
     column_names = []
@@ -59,6 +60,3 @@ class Song
   end
 
 end
-
-
-
