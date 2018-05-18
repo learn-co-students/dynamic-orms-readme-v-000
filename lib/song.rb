@@ -12,6 +12,7 @@ class Song
     DB[:conn].results_as_hash = true
 
     sql = "pragma table_info('#{table_name}')"
+    puts sql
 
     table_info = DB[:conn].execute(sql)
     column_names = []
@@ -45,12 +46,17 @@ class Song
     values = []
     self.class.column_names.each do |col_name|
       values << "'#{send(col_name)}'" unless send(col_name).nil?
+      puts "values"
+      puts values
     end
     values.join(", ")
   end
 
   def col_names_for_insert
+
     self.class.column_names.delete_if {|col| col == "id"}.join(", ")
+    puts "in insert"
+
   end
 
   def self.find_by_name(name)
@@ -59,6 +65,8 @@ class Song
   end
 
 end
-
-
-
+s = Song.new
+s.name  = "Molly1"
+s.album = "album1"
+s.save
+puts Song.column_names
