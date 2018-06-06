@@ -10,4 +10,16 @@ puts "song name: " + song.name
 puts "song album: " + song.album
 song.save
 
-DB[:conn].execute("SELECT * FROM songs")
+ghost = Song.find_by_name("(Ghost) Riders in the Sky")
+puts ghost
+
+if !!ghost 
+	ghost = Song.new(name: "(Ghost) Riders in the Sky", album: "various")
+end
+
+puts "song name: " + ghost.name
+puts "song album: " + ghost.album
+ghost.save
+
+puts DB[:conn].execute("SELECT * FROM songs")
+
