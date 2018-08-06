@@ -7,6 +7,7 @@ class Song
   def self.table_name
     self.to_s.downcase.pluralize
   end
+  # pluralize method available through active_support/inflector library available at the top. 
 
   def self.column_names
     DB[:conn].results_as_hash = true
@@ -59,6 +60,3 @@ class Song
   end
 
 end
-
-
-
