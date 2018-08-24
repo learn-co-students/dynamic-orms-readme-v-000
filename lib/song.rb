@@ -8,6 +8,7 @@ class Song
     self.to_s.downcase.pluralize
   end
 
+#queries table for column names (table created in environment)
   def self.column_names
     DB[:conn].results_as_hash = true
 
@@ -18,7 +19,7 @@ class Song
     table_info.each do |row|
       column_names << row["name"]
     end
-    column_names.compact
+    column_names.compact#removes nil values
   end
 
   self.column_names.each do |col_name|
@@ -43,12 +44,14 @@ class Song
 
   def values_for_insert
     values = []
-    self.class.column_names.each do |col_name|
+    self.class.column_names.each do |col_name| #this just spits out the column names, not the values contained within
+          binding.pry
       values << "'#{send(col_name)}'" unless send(col_name).nil?
     end
     values.join(", ")
   end
 
+#gives us "name,album"
   def col_names_for_insert
     self.class.column_names.delete_if {|col| col == "id"}.join(", ")
   end
@@ -59,6 +62,3 @@ class Song
   end
 
 end
-
-
-
