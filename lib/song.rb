@@ -3,7 +3,6 @@ require 'active_support/inflector'
 
 class Song
 
-
   def self.table_name
     self.to_s.downcase.pluralize
   end
@@ -39,6 +38,7 @@ class Song
 
   def table_name_for_insert
     self.class.table_name
+    #uses table_name to get the table name.
   end
 
   def values_for_insert
@@ -51,6 +51,7 @@ class Song
 
   def col_names_for_insert
     self.class.column_names.delete_if {|col| col == "id"}.join(", ")
+    #column_names is used and id's don't need to be added when inserting first.
   end
 
   def self.find_by_name(name)
@@ -59,6 +60,3 @@ class Song
   end
 
 end
-
-
-
