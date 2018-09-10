@@ -14,3 +14,8 @@ SQL
 
 DB[:conn].execute(sql)
 DB[:conn].results_as_hash = true
+
+# Here we are doing a couple of things
+# 1. Creating a database
+# 2. Drop songs to avoid an error
+# 3. Creating the songs table.
