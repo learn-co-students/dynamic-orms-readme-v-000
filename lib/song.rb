@@ -3,22 +3,27 @@ require 'active_support/inflector'
 
 class Song
 
-
-  def self.table_name
+  # #2, build attr_accessors from column names:
+  #takes the name of the class, referenced by self keyword,
+  #and turns it into a string, downcases, and pluaralizes it to match convention
+  #from the ACTIVE_SUPPORT/INFLECTOR library
+  def self.table_name  
     self.to_s.downcase.pluralize
   end
 
+  #to obtain column names we use the "PRAGMA table_info(<table name>)" which
+  #thanks to #results_as_hash (config) gives us an array desc. the table
   def self.column_names
     DB[:conn].results_as_hash = true
 
-    sql = "pragma table_info('#{table_name}')"
+    sql = "pragma table_info('#{table_name}')" #will create a hash for each column, we only need name from each
 
     table_info = DB[:conn].execute(sql)
     column_names = []
-    table_info.each do |row|
+    table_info.each do |row| #grabs the column name from each hash
       column_names << row["name"]
     end
-    column_names.compact
+    column_names.compact #gets rid of any nil values to be safe
   end
 
   self.column_names.each do |col_name|
