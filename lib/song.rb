@@ -21,10 +21,14 @@ class Song
     column_names.compact
   end
 
+  # iterate over the column names stored in column_names
+  # set attr_accessor for each one
+  # convert each to a symbol
   self.column_names.each do |col_name|
     attr_accessor col_name.to_sym
   end
 
+  # argument of option defaults to a empty hash
   def initialize(options={})
     options.each do |property, value|
       self.send("#{property}=", value)
@@ -49,6 +53,8 @@ class Song
     values.join(", ")
   end
 
+  # comma separated list of the column names of the table
+  # associated with any given class
   def col_names_for_insert
     self.class.column_names.delete_if {|col| col == "id"}.join(", ")
   end
@@ -59,6 +65,3 @@ class Song
   end
 
 end
-
-
-
