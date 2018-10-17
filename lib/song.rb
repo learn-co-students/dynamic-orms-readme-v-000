@@ -50,6 +50,7 @@ class Song
   end
 
   def col_names_for_insert
+    #here we avoid the id column name - whereas the values for insert uses the fact that id is nil to avoid
     self.class.column_names.delete_if {|col| col == "id"}.join(", ")
   end
 
@@ -59,6 +60,3 @@ class Song
   end
 
 end
-
-
-
