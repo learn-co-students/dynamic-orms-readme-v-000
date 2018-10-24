@@ -1,5 +1,6 @@
 require_relative "../config/environment.rb"
 require 'active_support/inflector'
+require 'pry'
 
 class Song
 
@@ -20,6 +21,7 @@ class Song
     end
     column_names.compact
   end
+
 
   self.column_names.each do |col_name|
     attr_accessor col_name.to_sym
@@ -59,6 +61,3 @@ class Song
   end
 
 end
-
-
-
