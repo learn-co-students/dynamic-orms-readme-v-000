@@ -5,7 +5,7 @@ class Song
 
 
   def self.table_name
-    self.to_s.downcase.pluralize
+     self.to_s.downcase.pluralize
   end
 
   def self.column_names
@@ -25,9 +25,11 @@ class Song
     attr_accessor col_name.to_sym
   end
 
-  def initialize(options={})
+  def initialize(option
+    s={})
     options.each do |property, value|
       self.send("#{property}=", value)
+      binding.pry 
     end
   end
 
@@ -59,6 +61,3 @@ class Song
   end
 
 end
-
-
-
