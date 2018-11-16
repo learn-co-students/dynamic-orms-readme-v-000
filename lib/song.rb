@@ -26,6 +26,7 @@ class Song
   end
 
   def initialize(options={})
+    #binding.pry
     options.each do |property, value|
       self.send("#{property}=", value)
     end
@@ -54,8 +55,8 @@ class Song
   end
 
   def self.find_by_name(name)
-    sql = "SELECT * FROM #{self.table_name} WHERE name = '#{name}'"
-    DB[:conn].execute(sql)
+    sql = "SELECT * FROM #{self.table_name} WHERE name = ?"
+    DB[:conn].execute(sql, name)
   end
 
 end
