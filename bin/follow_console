@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+require 'sqlite3'
+require 'irb'
+
+require_relative "../lib/song_follow.rb"
+require_relative "../config/environment.rb"
+
+puts "Welcome to your console/sandbox"
+IRB.start
