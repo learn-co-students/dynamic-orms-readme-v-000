@@ -15,6 +15,7 @@ class Song
     sql = "pragma table_info('#{table_name}')"
 
     table_info = DB[:conn].execute(sql)
+    # puts "songs table info: #{table_info}"
     
     column_names = []
     table_info.each do |row|
@@ -29,6 +30,7 @@ class Song
   end
 
   def initialize(options={})
+    #puts "Self = #{self}" # self = the current Song instance
     options.each do |property, value|
       self.send("#{property}=", value)
     end

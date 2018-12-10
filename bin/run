@@ -8,6 +8,49 @@ require_relative "../config/environment.rb"
 song = Song.new(name: "Hello", album: "25")
 puts "song name: " + song.name
 puts "song album: " + song.album
-song.save
+puts "Song 1 Values for Insert: #{song.values_for_insert}"
+puts "Song 1 id: #{song.save}"
 
-DB[:conn].execute("SELECT * FROM songs")
+puts Song.table_name
+puts Song.column_names.inspect
+
+song_two_hash = {"name" => "Christmas Sweet: God Rest Ye Merry, Gentleman", "album" => "Mannheim Steamroller Christmas"}
+song_two = Song.new(song_two_hash)
+puts "Song Two name: #{song_two.name}"
+puts "Song Two album: #{song_two.album}"
+puts "Song 2 Values for Insert: #{song_two.values_for_insert}"
+puts "Song 2 id: #{song_two.save}"
+
+all_songs = DB[:conn].execute("SELECT * FROM songs")
+puts all_songs
+
+puts "\n" + song.table_name_for_insert, song_two.table_name_for_insert
+puts "Column Names for songs table: #{Song.column_names}"
+puts "Song 1 Column Names for Insert: " + song.col_names_for_insert.inspect
+puts "Song 2 Column Names for Insert: #{song_two.col_names_for_insert}"
+puts "Song 1 Values for Insert: #{song.values_for_insert}"
+puts "Song 2 Values for Insert: #{song_two.values_for_insert}"
+
+puts "Song 1: #{Song.find_by_name(song.name)}"
+puts "Song 2: #{Song.find_by_name("Christmas Sweet: God Rest Ye Merry, Gentleman")}"
+
+song_three = Song.new(name: "Hello", album: "25")
+song_three.save
+duplicate_songs = "SELECT * FROM songs WHERE name = 'Hello'"
+puts DB[:conn].execute(duplicate_songs) # So, THIS #save method doesn't check for duplicate songs.
+
+song_total = DB[:conn].execute("SELECT * FROM songs").size
+puts "Song Total: #{song_total}"
+
+# song.save # This breaks because the song is trying to execute this SQL statement:
+# INSERT into songs (name, album) VALUES ('1', 'Hello', '25')
+# This is because the song has already been saved and now has an id.
+
+# Since I have two duplicate songs, this will return an array with TWO song hashes:
+puts "Song 1: #{Song.find_by_name(song.name)}"
+# But this returns an array with ONE song hash:
+puts "Song 2: #{Song.find_by_name(song_two.name)}"
+
+puts "\n"
+all_song_attributes = DB[:conn].execute('SELECT id, name, album FROM songs')
+all_song_attributes.each {|song| puts song['id'], song['name'], song['album']}
