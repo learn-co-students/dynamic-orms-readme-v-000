@@ -1,4 +1,4 @@
-#!/usr/bin/env ruby 
+#!/usr/bin/env ruby
 require 'sqlite3'
 
 require_relative "../lib/song.rb"
@@ -9,5 +9,27 @@ song = Song.new(name: "Hello", album: "25")
 puts "song name: " + song.name
 puts "song album: " + song.album
 song.save
+
+tunes = Song.new(name: "0 to 100", album: "Drake")
+puts "tunes name: " + tunes.name
+puts "tunes album: " + tunes.album
+tunes.save
+
+play = Song.new(name: "Clocks", album: "Coldplay cd")
+puts "play name: " + play.name
+puts "play album: " + play.album
+play.save
+
+chill = Song.new(name: "99 problems", album: "Jay Z album")
+puts "chill name: " + chill.name
+puts "chill album: " + chill.album
+chill.save
+
+relax = Song.new(name: "Turn up", album: "unknown")
+puts "relax name: " + relax.name
+puts "relax album: " + relax.album
+relax.save
+
+
 
 DB[:conn].execute("SELECT * FROM songs")
