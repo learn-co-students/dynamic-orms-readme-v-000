@@ -1,13 +1,50 @@
 #!/usr/bin/env ruby
+
+## top of new code ##
 require 'sqlite3'
 
 require_relative "../lib/song.rb"
 require_relative "../config/environment.rb"
 
-
+## Practice creating, saving and querying songs
 song = Song.new(name: "Hello", album: "25")
+
 puts "song name: " + song.name
 puts "song album: " + song.album
 song.save
 
+a_song = Song.new(name: "first_song_name", album: "first_song_album")
+
+puts "song name: " + a_song.name
+puts "song album: " + a_song.album
+a_song.save
+
 DB[:conn].execute("SELECT * FROM songs")
+
+sql = <<-SQL
+  INSERT INTO students (name, album)
+  VALUES (?, ?)
+SQL
+
+DB[:conn].execute(sql, self.name, self.album)
+## Bottom of new code ##
+###############################################
+
+###############################################
+## Below is the old code that would work ##
+
+# #!/usr/bin/env ruby
+# require 'sqlite3'
+#
+# require_relative "../lib/song.rb"
+# require_relative "../config/environment.rb"
+#
+#
+# song = Song.new(name: "Hello", album: "25")
+# puts "song name: " + song.name
+# puts "song album: " + song.album
+# song.save
+#
+# DB[:conn].execute("SELECT * FROM songs")
+
+## Bottom of old code ##
