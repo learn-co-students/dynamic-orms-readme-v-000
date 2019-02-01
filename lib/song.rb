@@ -3,15 +3,21 @@ require 'active_support/inflector'
 
 class Song
 
-
-  def self.table_name
+  def self.table_name 
     self.to_s.downcase.pluralize
+      # takes the name of the class (refer to self keyword)
+      # turns into a String
+      # downcases
+      # makes it plural
   end
 
   def self.column_names
     DB[:conn].results_as_hash = true
+      # "don't return an array...return a hash with column names as keys!"
 
     sql = "pragma table_info('#{table_name}')"
+      # returns an array of hashes describing the table
+      # each hash == info about one column
 
     table_info = DB[:conn].execute(sql)
     column_names = []
@@ -59,6 +65,5 @@ class Song
   end
 
 end
-
 
 
