@@ -5,27 +5,27 @@ class Song
 
 
   def self.table_name
-    self.to_s.downcase.pluralize
+    self.to_s.downcase.pluralize #matches class name to table name
   end
 
   def self.column_names
-    DB[:conn].results_as_hash = true
+    DB[:conn].results_as_hash = true #otherwise result is array
 
-    sql = "pragma table_info('#{table_name}')"
+    sql = "pragma table_info('#{table_name}')" #converts from columns
 
     table_info = DB[:conn].execute(sql)
     column_names = []
     table_info.each do |row|
-      column_names << row["name"]
+      column_names << row["name"] #takes value from name hash
     end
-    column_names.compact
+    column_names.compact #no nil
   end
 
   self.column_names.each do |col_name|
-    attr_accessor col_name.to_sym
+    attr_accessor col_name.to_sym #turns to attributes
   end
 
-  def initialize(options={})
+  def initialize(options={}) #takes in hash
     options.each do |property, value|
       self.send("#{property}=", value)
     end
@@ -59,6 +59,3 @@ class Song
   end
 
 end
-
-
-
