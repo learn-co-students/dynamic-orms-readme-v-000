@@ -13,4 +13,4 @@ sql = <<-SQL
 SQL
 
 DB[:conn].execute(sql)
-DB[:conn].results_as_hash = true
+DB[:conn].results_as_hash = true #returns result as a hash when selecting data 
