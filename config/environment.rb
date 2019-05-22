@@ -1,4 +1,4 @@
-require 'sqlite3'
+ require 'sqlite3'
 
 
 DB = {:conn => SQLite3::Database.new("db/songs.db")}
