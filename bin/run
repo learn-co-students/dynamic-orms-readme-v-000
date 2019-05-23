@@ -11,3 +11,28 @@ puts "song album: " + song.album
 song.save
 
 DB[:conn].execute("SELECT * FROM songs")
+
+song1 = Song.new(name: "Blackbird", album: "White Album")
+puts "song name: " + song1.name
+puts "song album: " + song1.album
+song1.save
+
+
+test = Song.find_by_name("Hello")
+puts "find_by_name: " + test.join(", ")
+
+test = Song.find_by_name("Blackbird")
+puts "find_by_name: " + test.join(", ")
+
+
+table = Song.table_name
+puts "table name: " + table
+
+column_names = Song.column_names
+puts "column_names: " + column_names.join(", ")
+
+values = song.values_for_insert
+puts "values song 1: " + values
+
+values = song1.values_for_insert
+puts "values song 2: " + values
