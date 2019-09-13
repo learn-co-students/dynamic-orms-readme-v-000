@@ -1,5 +1,6 @@
 require_relative "../config/environment.rb"
 require 'active_support/inflector'
+require 'pry'
 
 class Song
 
@@ -18,7 +19,11 @@ class Song
     table_info.each do |row|
       column_names << row["name"]
     end
+    binding.pry
     column_names.compact
+    # sql = "SELECT * FROM #{self.table_name}"
+    # result = DB[:conn].execute(sql)
+    # binding.pry
   end
 
   self.column_names.each do |col_name|
@@ -59,6 +64,3 @@ class Song
   end
 
 end
-
-
-
