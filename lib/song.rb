@@ -3,7 +3,6 @@ require 'active_support/inflector'
 
 class Song
 
-
   def self.table_name
     self.to_s.downcase.pluralize
   end
@@ -29,7 +28,7 @@ class Song
     options.each do |property, value|
       self.send("#{property}=", value)
     end
-  end
+   end
 
   def save
     sql = "INSERT INTO #{table_name_for_insert} (#{col_names_for_insert}) VALUES (#{values_for_insert})"
@@ -59,6 +58,3 @@ class Song
   end
 
 end
-
-
-
