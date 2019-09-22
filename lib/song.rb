@@ -6,6 +6,7 @@ class Song
 
   def self.table_name
     self.to_s.downcase.pluralize
+    # the #pluralize method is provided to us by the active_support/inflector code library, at the top of this file
   end
 
   def self.column_names
@@ -18,11 +19,12 @@ class Song
     table_info.each do |row|
       column_names << row["name"]
     end
-    column_names.compact
+    column_names.compact ##compact will get rid of any nil values that may end up in our collection
   end
 
   self.column_names.each do |col_name|
     attr_accessor col_name.to_sym
+    #this is metaprogramming because we are writing code that writes code for us
   end
 
   def initialize(options={})
@@ -59,6 +61,3 @@ class Song
   end
 
 end
-
-
-
