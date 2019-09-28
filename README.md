@@ -6,7 +6,7 @@
 2. Build a basic dynamic ORM
 3. Build a dynamic ORM that can be used by any given Ruby class
 
-## Why Dynamic ORMs?
+## Why Dynamic ORMs????
 
 As developers, we understand the need for our Ruby programs to be able to connect with a database. Any complex application is going to need to persist some data. Along with this need, we recognize the need for the connection between our program and our database to be, like all of our code, organized and sensible. That is why we use the ORM design pattern in which a Ruby class is mapped to a database table and instances of that class are represented as rows in that table.
 
@@ -98,7 +98,7 @@ It will return something that looks like this:
 {"id"=>1, "name"=>"Hello", "album"=>"25", 0 => 1, 1 => "Hello", 2 => "25"}
 ```
 
-This will be helpful to us as we use information requested from our database table to build attributes and methods on our `Song` class, but more on that later.
+This will be helpful to us as we use information requested from our database table to build attributes and methods on our `Song` class, but more on that later....
 
 Okay, now that we see how our database and table have been set up, let's move onto metaprogramming our `Song` class using information from our database.
 
@@ -453,7 +453,7 @@ This method is dynamic and abstract because it does not reference the table name
 
 ## Conclusion
 
-Remember, dynamic ORMs are hard. Spend some time reading over the code in `lib/song.rb` and playing with the code in `bin/run`. Practice creating, saving and querying songs in the `bin/run` file and run the program again and again until you get a better feel for it. 
+Remember, dynamic ORMs are hard. Spend some time reading over the code in `lib/song.rb` and playing with the code in `bin/run`. Practice creating, saving and querying songs in the `bin/run` file and run the program again and again until you get a better feel for it.
 
 Now that we have all of these great dynamic, abstract methods that connect a class to a database table, we'll move on to extracting into a parent class that any other class can inherit from.
 
