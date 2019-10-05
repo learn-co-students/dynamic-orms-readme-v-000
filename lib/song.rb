@@ -4,11 +4,11 @@ require 'active_support/inflector'
 class Song
 
 
-  def self.table_name
+  def self.table_name #creates table
     self.to_s.downcase.pluralize
   end
 
-  def self.column_names
+  def self.column_names #creates column 
     DB[:conn].results_as_hash = true
 
     sql = "pragma table_info('#{table_name}')"
@@ -21,11 +21,11 @@ class Song
     column_names.compact
   end
 
-  self.column_names.each do |col_name|
-    attr_accessor col_name.to_sym
+  self.column_names.each do |col_name|  #Builds our attr_accessors
+    attr_accessor col_name.to_sym  
   end
 
-  def initialize(options={})
+  def initialize(options={}) #Builds out initialize method
     options.each do |property, value|
       self.send("#{property}=", value)
     end
