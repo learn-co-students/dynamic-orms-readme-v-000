@@ -134,7 +134,7 @@ How do you query a table for the names of its columns? For this we need to use t
 PRAGMA table_info(<table name>)
 ```
 
-This will return to us (thanks to our handy `#results_as_hash` method) an array of hashes describing the table itself. Each hash will contain information about one column. The array of hashes will look something like this:
+This line of code that utilizes <a href="#resources">PRAGMA</a> will return to us (thanks to our handy `#results_as_hash` method) an array of hashes describing the table itself. Each hash will contain information about one column. The array of hashes will look something like this:
 
 ```ruby
  [{"cid"=>0,
@@ -458,6 +458,7 @@ Remember, dynamic ORMs are hard. Spend some time reading over the code in `lib/s
 Now that we have all of these great dynamic, abstract methods that connect a class to a database table, we'll move on to extracting into a parent class that any other class can inherit from.
 
 ## Resources
+<a name="pragma"></a>
 [SQLite- PRAGMA](http://www.tutorialspoint.com/sqlite/sqlite_pragma.htm)
 
 [PRAGMA](https://www.sqlite.org/pragma.html#pragma_table_info)
