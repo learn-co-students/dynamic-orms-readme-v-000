@@ -430,13 +430,13 @@ Now that we have abstract, flexible ways to grab each of the constituent parts o
 
 ```ruby
 def save
-  sql = "INSERT INTO #{table_name_for_insert} (#{col_names_for_insert}) VALUES (#{values_for_insert})"
-
-  DB[:conn].execute(sql)
+  DB[:conn].execute("INSERT INTO #{table_name_for_insert} (#{col_names_for_insert}) VALUES (?)", [values_for_insert])
 
   @id = DB[:conn].execute("SELECT last_insert_rowid() FROM #{table_name_for_insert}")[0][0]
 end
 ```
+
+**Note**: Using `String` interpolation for a SQL query creates a SQL injection vulnerability, which we've previously stated is a bad idea as it creates a security issue, however, we're using these examples to illustrate how dynamic ORMs work.
 
 ### Selecting Records in a Dynamic Manner
 
@@ -444,10 +444,11 @@ Now that we have a better understanding of how our dynamic, abstract, ORM works,
 
 ```ruby
 def self.find_by_name(name)
-  sql = "SELECT * FROM #{self.table_name} WHERE name = '#{name}'" 
-  DB[:conn].execute(sql)
+  DB[:conn].execute("SELECT * FROM #{self.table_name} WHERE name = ?", [name])
 end
 ```
+
+**Note**: Using `String` interpolation for a SQL query creates a SQL injection vulnerability, which we've previously stated is a bad idea as it creates a security issue, however, we're using these examples to illustrate how dynamic ORMs work.
 
 This method is dynamic and abstract because it does not reference the table name explicitly. Instead it uses the `#table_name` class method we built that will return the table name associated with any given class.
 
