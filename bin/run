@@ -10,4 +10,13 @@ puts "song name: " + song.name
 puts "song album: " + song.album
 song.save
 
-DB[:conn].execute("SELECT * FROM songs")
+
+song2 = Song.new(name: "blah", album: "blah blah")
+song2.save
+song3 = Song.new(name: "ha", album: "ha ha")
+song3.save
+
+
+songs = DB[:conn].execute("SELECT * FROM songs")
+puts songs.class
+puts songs
