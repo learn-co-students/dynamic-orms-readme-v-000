@@ -3,11 +3,12 @@ require 'active_support/inflector'
 
 class Song
 
-
+  #table_name Method
   def self.table_name
     self.to_s.downcase.pluralize
   end
 
+  #column_name Method
   def self.column_names
     DB[:conn].results_as_hash = true
 
