@@ -14,18 +14,17 @@ class Song
     sql = "pragma table_info('#{table_name}')"
 
     table_info = DB[:conn].execute(sql)
-    column_names = []
+    column_names = [ ]
     table_info.each do |row|
       column_names << row["name"]
     end
     column_names.compact
   end
-
   self.column_names.each do |col_name|
     attr_accessor col_name.to_sym
   end
 
-  def initialize(options={})
+  def initialize(options={ })
     options.each do |property, value|
       self.send("#{property}=", value)
     end
@@ -42,7 +41,7 @@ class Song
   end
 
   def values_for_insert
-    values = []
+    values = [ ]
     self.class.column_names.each do |col_name|
       values << "'#{send(col_name)}'" unless send(col_name).nil?
     end
@@ -57,7 +56,6 @@ class Song
     sql = "SELECT * FROM #{self.table_name} WHERE name = '#{name}'"
     DB[:conn].execute(sql)
   end
-
 end
 
 
